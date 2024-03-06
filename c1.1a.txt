@@ -1,0 +1,101 @@
+mysql> create table Course(course_id int(3),course_name varchar(10),course_duration int(1));
+Query OK, 0 rows affected, 2 warnings (0.06 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| Course            |
+| Student           |
++-------------------+
+2 rows in set (0.00 sec)
+mysql> desc Course;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| course_id       | int         | YES  |     | NULL    |       |
+| course_name     | varchar(10) | YES  |     | NULL    |       |
+| course_duration | int         | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc Student;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| roll_no   | int         | YES  |     | NULL    |       |
+| name      | varchar(10) | YES  |     | NULL    |       |
+| dob       | date        | YES  |     | NULL    |       |
+| address   | tinytext    | YES  |     | NULL    |       |
+| phone_no  | varchar(10) | YES  |     | NULL    |       |
+| blood_grp | varchar(10) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> alter table Student drop column blood_grp ;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc Student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| roll_no  | int         | YES  |     | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| address  | tinytext    | YES  |     | NULL    |       |
+| phone_no | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> alter table Student add Adar_no int(15);
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+mysql> desc Student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| roll_no  | int         | YES  |     | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| address  | tinytext    | YES  |     | NULL    |       |
+| phone_no | varchar(10) | YES  |     | NULL    |       |
+| Adar_no  | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> alter table Student modify phone_no  int;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| roll_no  | int         | YES  |     | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| address  | tinytext    | YES  |     | NULL    |       |
+| phone_no | int         | YES  |     | NULL    |       |
+| Adar_no  | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> drop table student;
+ERROR 1051 (42S02): Unknown table 'college.student'
+mysql> drop table Student;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc Student;
+ERROR 146 (42S02): Table 'college.Student' doesn't exist
+mysql>mysql> drop table Course;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc Course;
+ERROR 1146 (42S02): Table 'college.Course' doesn't exist
+mysql> drop database college;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> use college;
+ERROR 1049 (42000): Unknown database 'college'
+
+
+ 
+
+
