@@ -1,0 +1,256 @@
+mysql> INSERT INTO Department (dept_no, dept_name) VALUES ('D   01', 'Engineering'), ('D02', 'Human Res'), ('D03', 'Finance'), ('D04', 'Marketing'), ('D05', 'Sales'), ('D06', 'IT'), ('D07', 'Customer'),
+('D08', 'Research'), ('D09', 'Operations'), ('D10', 'Legal');
+ERROR 1406 (22001): Data too long for column 'dept_no' at row 1
+mysql> INSERT INTO Department (dept_no, dept_name) VALUES ('D01', 'Engineering'), ('D02', 'Human Res'), ('D03', 'Finance'), ('D04', 'Marketing'), ('D05', 'Sales'), ('D06', 'IT'), ('D07', 'Customer'), ('D08', 'Research'), ('D09', 'Operations'), ('D10', 'Legal');
+Query OK, 10 rows affected (0.05 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> delete  from Employee;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO Employee (emp_no, emp_name, dob, address, mobile_no, dept_no, salary, designation) VALUES (1, 'John ', '1985-04-12', '123 Main St', 1234567890, 'D01', 5000, 'Manager'), (2, 'Jane Doe', '1990-05-15', '456 Elm St', 2345678901, 'D02', 55000, 'Lead'), (3, 'Jim Beam', '1988-08-21', '789 Pine St', 3456789012, 'D03', 4000, 'Analyst'), (4, 'Jill Hill', '1992-11-30', '101 Oak St', 4567890123,
+'D04', 4800, 'Consultant'), (5, 'Jack Jill', '1987-03-14', '202 Birch St', 5678901234, 'D01', 53000, 'Senior Manager'), (6, 'Alice Wonderland', '1989-07-24', '303 Cedar St', 6789012345, 'D02', 60000, 'Developer'), (7, 'Bob Builder', '1991-09-16', '404 Spruce St', 7890123456, 'D03', 7000, 'Engineer'), (8, 'Charlie Brown', '1986-01-20', '505 Maple St', 8901234567, 'D04', 62000, 'Architect'), (9, 'Diana Prince', '1993-12-30', '606 Willow St', 9012345678, 'D01', 65000, 'Director'), (10, 'Bruce Wayne', '1995-10-15', '707 Palm St', 1234567890, 'D02', 70000, 'CEO');
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select *from Employee;
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+| emp_no | emp_name         | dob        | address       | mobile_no  | dept_no | salary | designation    |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+|      1 | John             | 1985-04-12 | 123 Main St   | 1234567890 | D01     |   5000 | Manager        |
+|      2 | Jane Doe         | 1990-05-15 | 456 Elm St    | 2345678901 | D02     |  55000 | Lead           |
+|      3 | Jim Beam         | 1988-08-21 | 789 Pine St   | 3456789012 | D03     |   4000 | Analyst        |
+|      4 | Jill Hill        | 1992-11-30 | 101 Oak St    | 4567890123 | D04     |   4800 | Consultant     |
+|      5 | Jack Jill        | 1987-03-14 | 202 Birch St  | 5678901234 | D01     |  53000 | Senior Manager |
+|      6 | Alice Wonderland | 1989-07-24 | 303 Cedar St  | 6789012345 | D02     |  60000 | Developer      |
+|      7 | Bob Builder      | 1991-09-16 | 404 Spruce St | 7890123456 | D03     |   7000 | Engineer       |
+|      8 | Charlie Brown    | 1986-01-20 | 505 Maple St  | 8901234567 | D04     |  62000 | Architect      |
+|      9 | Diana Prince     | 1993-12-30 | 606 Willow St | 9012345678 | D01     |  65000 | Director       |
+|     10 | Bruce Wayne      | 1995-10-15 | 707 Palm St   | 1234567890 | D02     |  70000 | CEO            |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+10 rows in set (0.00 sec)
+
+mysql> select *from Department;
++---------+-------------+
+| dept_no | dept_name   |
++---------+-------------+
+| D01     | Engineering |
+| D02     | Human Res   |
+| D03     | Finance     |
+| D04     | Marketing   |
+| D05     | Sales       |
+| D06     | IT          |
+| D07     | Customer    |
+| D08     | Research    |
+| D09     | Operations  |
+| D10     | Legal       |
++---------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_no,emp_name from Employee where dept_no='D02';
++--------+------------------+
+| emp_no | emp_name         |
++--------+------------------+
+|      2 | Jane Doe         |
+|      6 | Alice Wonderland |
+|     10 | Bruce Wayne      |
++--------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> select emp_no,emp_name,designation,dept_no,salary from Employee order by salary desc;
++--------+------------------+----------------+---------+--------+
+| emp_no | emp_name         | designation    | dept_no | salary |
++--------+------------------+----------------+---------+--------+
+|     10 | Bruce Wayne      | CEO            | D02     |  70000 |
+|      9 | Diana Prince     | Director       | D01     |  65000 |
+|      8 | Charlie Brown    | Architect      | D04     |  62000 |
+|      6 | Alice Wonderland | Developer      | D02     |  60000 |
+|      2 | Jane Doe         | Lead           | D02     |  55000 |
+|      5 | Jack Jill        | Senior Manager | D01     |  53000 |
+|      7 | Bob Builder      | Engineer       | D03     |   7000 |
+|      1 | John             | Manager        | D01     |   5000 |
+|      4 | Jill Hill        | Consultant     | D04     |   4800 |
+|      3 | Jim Beam         | Analyst        | D03     |   4000 |
++--------+------------------+----------------+---------+--------+
+10 rows in set (0.00 sec)
+mysql> select emp_no,emp_name from Employee where salary between  2000 and 5000;
++--------+-----------+
+| emp_no | emp_name  |
++--------+-----------+
+|      1 | John      |
+|      3 | Jim Beam  |
+|      4 | Jill Hill |
++--------+-----------+
+3 rows in set (0.00 sec)
+mysql> select distinct designation from Employee;
++----------------+
+| designation    |
++----------------+
+| Manager        |
+| Lead           |
+| Analyst        |
+| Consultant     |
+| Senior Manager |
+| Developer      |
+| Engineer       |
+| Architect      |
+| Director       |
+| CEO            |
++----------------+
+10 rows in set (0.01 sec)
+
+mysql> update Employee set salary=45000 where designation='Manager';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employee;
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+| emp_no | emp_name         | dob        | address       | mobile_no  | dept_no | salary | designation    |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+|      1 | John             | 1985-04-12 | 123 Main St   | 1234567890 | D01     |  45000 | Manager        |
+|      2 | Jane Doe         | 1990-05-15 | 456 Elm St    | 2345678901 | D02     |  55000 | Lead           |
+|      3 | Jim Beam         | 1988-08-21 | 789 Pine St   | 3456789012 | D03     |   4000 | Analyst        |
+|      4 | Jill Hill        | 1992-11-30 | 101 Oak St    | 4567890123 | D04     |   4800 | Consultant     |
+|      5 | Jack Jill        | 1987-03-14 | 202 Birch St  | 5678901234 | D01     |  53000 | Senior Manager |
+|      6 | Alice Wonderland | 1989-07-24 | 303 Cedar St  | 6789012345 | D02     |  60000 | Developer      |
+|      7 | Bob Builder      | 1991-09-16 | 404 Spruce St | 7890123456 | D03     |   7000 | Engineer       |
+|      8 | Charlie Brown    | 1986-01-20 | 505 Maple St  | 8901234567 | D04     |  62000 | Architect      |
+|      9 | Diana Prince     | 1993-12-30 | 606 Willow St | 9012345678 | D01     |  65000 | Director       |
+|     10 | Bruce Wayne      | 1995-10-15 | 707 Palm St   | 1234567890 | D02     |  70000 | CEO            |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+10 rows in set (0.01 sec)
+
+mysql> update Employee set mobile_no = '0123456789' where emp_name='John';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employee;
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+| emp_no | emp_name         | dob        | address       | mobile_no  | dept_no | salary | designation    |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+|      1 | John             | 1985-04-12 | 123 Main St   | 0123456789 | D01     |  45000 | Manager        |
+|      2 | Jane Doe         | 1990-05-15 | 456 Elm St    | 2345678901 | D02     |  55000 | Lead           |
+|      3 | Jim Beam         | 1988-08-21 | 789 Pine St   | 3456789012 | D03     |   4000 | Analyst        |
+|      4 | Jill Hill        | 1992-11-30 | 101 Oak St    | 4567890123 | D04     |   4800 | Consultant     |
+|      5 | Jack Jill        | 1987-03-14 | 202 Birch St  | 5678901234 | D01     |  53000 | Senior Manager |
+|      6 | Alice Wonderland | 1989-07-24 | 303 Cedar St  | 6789012345 | D02     |  60000 | Developer      |
+|      7 | Bob Builder      | 1991-09-16 | 404 Spruce St | 7890123456 | D03     |   7000 | Engineer       |
+|      8 | Charlie Brown    | 1986-01-20 | 505 Maple St  | 8901234567 | D04     |  62000 | Architect      |
+|      9 | Diana Prince     | 1993-12-30 | 606 Willow St | 9012345678 | D01     |  65000 | Director       |
+|     10 | Bruce Wayne      | 1995-10-15 | 707 Palm St   | 1234567890 | D02     |  70000 | CEO            |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+10 rows in set (0.00 sec)
+mysql> delete from Employee where salary=7000;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Employee;
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+| emp_no | emp_name         | dob        | address       | mobile_no  | dept_no | salary | designation    |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+|      1 | John             | 1985-04-12 | 123 Main St   | 0123456789 | D01     |  45000 | Manager        |
+|      2 | Jane Doe         | 1990-05-15 | 456 Elm St    | 2345678901 | D02     |  55000 | Lead           |
+|      3 | Jim Beam         | 1988-08-21 | 789 Pine St   | 3456789012 | D03     |   4000 | Analyst        |
+|      4 | Jill Hill        | 1992-11-30 | 101 Oak St    | 4567890123 | D04     |   4800 | Consultant     |
+|      5 | Jack Jill        | 1987-03-14 | 202 Birch St  | 5678901234 | D01     |  53000 | Senior Manager |
+|      6 | Alice Wonderland | 1989-07-24 | 303 Cedar St  | 6789012345 | D02     |  60000 | Developer      |
+|      8 | Charlie Brown    | 1986-01-20 | 505 Maple St  | 8901234567 | D04     |  62000 | Architect      |
+|      9 | Diana Prince     | 1993-12-30 | 606 Willow St | 9012345678 | D01     |  65000 | Director       |
+|     10 | Bruce Wayne      | 1995-10-15 | 707 Palm St   | 1234567890 | D02     |  70000 | CEO            |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> select emp_name,mobile_no from Employee where emp_name like'A%';
++------------------+------------+
+| emp_name         | mobile_no  |
++------------------+------------+
+| Alice Wonderland | 6789012345 |
++------------------+------------+
+1 row in set (0.00 sec)
+mysql> select*from Employee where length(emp_name)>=3 and salary>20000;
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+| emp_no | emp_name         | dob        | address       | mobile_no  | dept_no | salary | designation    |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+|      1 | John             | 1985-04-12 | 123 Main St   | 1234567890 | D01     |  45000 | Manager        |
+|      2 | Jane Doe         | 1990-05-15 | 456 Elm St    | 2345678901 | D02     |  55000 | Lead           |
+|      5 | Jack Jill        | 1987-03-14 | 202 Birch St  | 5678901234 | D01     |  53000 | Senior Manager |
+|      6 | Alice Wonderland | 1989-07-24 | 303 Cedar St  | 6789012345 | D02     |  60000 | Developer      |
+|      8 | Charlie Brown    | 1986-01-20 | 505 Maple St  | 8901234567 | D04     |  62000 | Architect      |
+|      9 | Diana Prince     | 1993-12-30 | 606 Willow St | 9012345678 | D01     |  65000 | Director       |
+|     10 | Bruce Wayne      | 1995-10-15 | 707 Palm St   | 1234567890 | D02     |  70000 | CEO            |
++--------+------------------+------------+---------------+------------+---------+--------+----------------+
+7 rows in set (0.00 sec)
+mysql> select*from Employee where emp_no in(1,2,3);
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp_no | emp_name | dob        | address     | mobile_no  | dept_no | salary | designation |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+|      1 | John     | 1985-04-12 | 123 Main St | 1234567890 | D01     |  45000 | Manager     |
+|      2 | Jane Doe | 1990-05-15 | 456 Elm St  | 2345678901 | D02     |  55000 | Lead        |
+|      3 | Jim Beam | 1988-08-21 | 789 Pine St | 3456789012 | D03     |   4000 | Analyst     |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+3 rows in set (0.00 sec)
+mysql> select emp_name,emp_no from Employee where designation in('Manager','Computer Assistant');
++----------+--------+
+| emp_name | emp_no |
++----------+--------+
+| John     |      1 |
++----------+--------+
+1 row in set (0.04 sec)
+
+mysql> select dept_no,count(*)as num_Employee from Employee group by dept_no;
++---------+--------------+
+| dept_no | num_Employee |
++---------+--------------+
+| D01     |            3 |
+| D02     |            3 |
+| D03     |            1 |
+| D04     |            2 |
++---------+--------------+
+4 rows in set (0.00 sec)
+mysql> select dept_no,avg(salary)as avg_Salary from Employee group by dept_no;
++---------+------------+
+| dept_no | avg_Salary |
++---------+------------+
+| D01     | 54333.3333 |
+| D02     | 61666.6667 |
+| D03     |  4000.0000 |
+| D04     | 33400.0000 |
++---------+------------+
+4 rows in set (0.00 sec)
+mysql> select dept_no,sum(salary)as total_Salary from Employee group by dept_no;
++---------+--------------+
+| dept_no | total_Salary |
++---------+--------------+
+| D01     |       163000 |
+| D02     |       185000 |
+| D03     |         4000 |
+| D04     |        66800 |
++---------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select dept_no,max(salary)as top_Salary,min(salary)as lower_salary from Employee group by dept_no;
++---------+------------+--------------+
+| dept_no | top_Salary | lower_salary |
++---------+------------+--------------+
+| D01     |      65000 |        45000 |
+| D02     |      70000 |        55000 |
+| D03     |       4000 |         4000 |
+| D04     |      62000 |         4800 |
++---------+------------+--------------+
+4 rows in set (0.00 sec)
+mysql> select avg(salary)as avg_Salary from Employee where dept_no!='D05';
++------------+
+| avg_Salary |
++------------+
+| 46533.3333 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary)as avg_Salary from Employee where dept_no!='D01'having avg_Salary>20000 order by avg_Salary;
++------------+
+| avg_Salary |
++------------+
+| 42633.3333 |
++------------+
+1 row in set (0.00 sec)
+
+
