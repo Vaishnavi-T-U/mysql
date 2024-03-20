@@ -245,12 +245,14 @@ mysql> select avg(salary)as avg_Salary from Employee where dept_no!='D05';
 +------------+
 1 row in set (0.00 sec)
 
-mysql> select avg(salary)as avg_Salary from Employee where dept_no!='D01'having avg_Salary>20000 order by avg_Salary;
-+------------+
-| avg_Salary |
-+------------+
-| 42633.3333 |
-+------------+
-1 row in set (0.00 sec)
+mysql> select dept_no,avg(salary) from Employee where dept_no!="D08" group by dept_no having avg(salary)>20000 order by avg(salary);
++---------+-------------+
+| dept_no | avg(salary) |
++---------+-------------+
+| D04     |  33400.0000 |
+| D01     |  54333.3333 |
+| D02     |  61666.6667 |
++---------+-------------+
+3 rows in set (0.00 sec)
 
 
