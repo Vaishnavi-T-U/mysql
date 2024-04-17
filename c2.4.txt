@@ -243,6 +243,14 @@ mysql> SELECT e.employee_id, e.first_name, e.last_name FROM employees e JOIN dep
 |           5 | David      | Johnson   |
 +-------------+------------+-----------+
 3 rows in set (0.00 sec)
+mysql> select * from employees where salary =(select max(salary) from employees);
++-------------+------------+-----------+---------------------------+--------------+------------+--------+----------+------------+---------------+
+| employee_id | first_name | last_name | email                     | phone_number | hire_date  | job_id | salary   | manager_id | department_id |
++-------------+------------+-----------+---------------------------+--------------+------------+--------+----------+------------+---------------+
+|           5 | David      | Johnson   | david.johnson@example.com | 111111111    | 2023-03-01 |      4 | 90000.00 |          2 |             3 |
++-------------+------------+-----------+---------------------------+--------------+------------+--------+----------+------------+---------------+
+1 row in set (0.01 sec)
+
 mysql> SELECT employee_id, first_name, last_name FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);
 +-------------+------------+-----------+
 | employee_id | first_name | last_name |
